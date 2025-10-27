@@ -131,7 +131,7 @@ public class PeliculaController {
     @GetMapping("/listado")
     public String listado(Model model, @RequestParam(required = false) String msj,
                           @RequestParam(required = false) String tipoMsj) {
-        model.addAttribute("titulo", "Listado de Pelicula");
+        model.addAttribute("titulo", "Listado de Peliculas");
         model.addAttribute("peliculas", service.findAll());
         if (!"".equals(tipoMsj) && !"".equals(msj)) {
             model.addAttribute("msj", msj);
