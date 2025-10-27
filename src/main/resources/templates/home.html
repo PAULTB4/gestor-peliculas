@@ -18,8 +18,8 @@
                          class="card-img-top" alt="foto">
 
                     <div class="card-body">
-                        <h5 class="card-title text-dark" th:text="${pelicula.nombre}"></h5>
-                        <p class="card-text text-muted" th:text="${pelicula.genero.nombre}"></p>
+                        <h5 class="card-title" th:text="${pelicula.nombre}"></h5>
+                        <p class="card-text " th:text="${pelicula.genero.nombre}"></p>
 
                         <!-- Calificación promedio -->
                         <div class="mb-2">
@@ -29,14 +29,14 @@
                             <span th:if="${i > pelicula.calificacionPromedio}">☆</span>
                         </span>
                     </span>
-                            <small class="text-muted ms-1" th:text="'(' + ${pelicula.totalResenas} + ')'"></small>
+                            <small class="ms-1" th:text="'(' + ${pelicula.totalResenas} + ')'"></small>
                         </div>
 
                         <div class="catalogo-actor-container" th:each="protagonista : ${pelicula.protagonistas}">
                             <div class="catalogo-actor-imagen"
                                  th:style="'background-image:url(' + ${protagonista.urlImagen} + ')'">
                             </div>
-                            <div class="catalogo-actor-texto text-dark" th:text="${protagonista.nombre}">
+                            <div class="catalogo-actor-texto" th:text="${protagonista.nombre}">
                             </div>
                         </div>
                     </div>
