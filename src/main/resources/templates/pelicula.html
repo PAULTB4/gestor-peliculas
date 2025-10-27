@@ -58,12 +58,27 @@
             </div>
         </div>
 
-        <input id="ids" name="ids" type="hidden">
+        <input id="ids" name="ids" type="text" value="${ids}">
+        <input id="id" name="id" type="text" th:field="*{id}">
+        <input id="imagen" name="imagen" type="text" th:field="*{imagen}">
+
         <div id="protagonistas_container" class="row"></div>
 
         <button type="submit" class="btn btn-primary float-end">Guardar</button>
     </form>
 </div>
 </body>
+    <script>
+        $(function(){
+            let ids = $('#ids').val();
+            let arr = ids.split(',');
+            $('#ids').val("");
+
+            arr.forEach(id =>{
+                $("#protagonistas").val(id);
+                actorSelected($("#protagonistas")[0]);
+            })
+        })
+    </script>
 </html>
 
