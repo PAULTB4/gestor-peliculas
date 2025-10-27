@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 
 
 @Entity
@@ -46,6 +47,33 @@ public class Pelicula implements Serializable {
     private List<Actor> protagonistas;
 
     private String imagen;
+
+    @OneToMany(mappedBy = "pelicula", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Resena> resenas = new ArrayList<>();
+
+    @Transient
+    public Double getCalificacionPromedio() {
+        if (resenas == null || resenas.isEmpty()) {
+            return 0.0;
+        }
+        return resenas.stream()
+                .mapToInt(Resena::getCalificacion)
+                .average()
+                .orElse(0.0);
+    }
+
+    @Transient
+    public Integer getTotalResenas() {
+        return resenas != null ? resenas.size() : 0;
+    }
+
+    public List<Resena> getResenas() {
+        return resenas;
+    }
+
+    public void setResenas(List<Resena> resenas) {
+        this.resenas = resenas;
+    }
 
     public String getImagen() {
         return imagen;

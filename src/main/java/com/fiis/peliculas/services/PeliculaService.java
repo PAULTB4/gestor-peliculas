@@ -40,4 +40,9 @@ public class PeliculaService implements IPeliculaService{
     public Page<Pelicula> findAll(Pageable pageable){
         return repo.findAll(pageable);
     }
+
+    @Override
+    public Page<Pelicula> buscarConFiltros(String nombre, Long generoId, Long actorId, Pageable pageable) {
+        return repo.buscarConFiltros(nombre, generoId, actorId, pageable);
+    }
 }

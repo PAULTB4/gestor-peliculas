@@ -55,3 +55,36 @@ function previsualizar() {
         vista.style.backgroundImage = "url('" + e.target.result + "')";
     }
 }
+
+// ===== MODO OSCURO =====
+
+// Inicializar modo oscuro al cargar la página
+$(document).ready(function() {
+    // Verificar preferencia guardada
+    const darkMode = localStorage.getItem('darkMode');
+
+    if (darkMode === 'enabled') {
+        enableDarkMode();
+    }
+
+    // Event listener para el toggle
+    $('#darkModeToggle').on('change', function() {
+        if (this.checked) {
+            enableDarkMode();
+        } else {
+            disableDarkMode();
+        }
+    });
+});
+
+function enableDarkMode() {
+    $('body').addClass('dark-mode');
+    $('#darkModeToggle').prop('checked', true);
+    localStorage.setItem('darkMode', 'enabled');
+}
+
+function disableDarkMode() {
+    $('body').removeClass('dark-mode');
+    $('#darkModeToggle').prop('checked', false);
+    localStorage.setItem('darkMode', 'disabled');
+}

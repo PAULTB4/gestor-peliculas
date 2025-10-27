@@ -61,7 +61,7 @@ public class PeliculaController {
             if("".equals(ids)){
                 ids = actor.getId().toString();
             }else{
-                ids = ids + actor.getId().toString();
+                ids = ids + "," + actor.getId().toString();
             }
         }
         model.addAttribute("pelicula", pelicula);
@@ -146,5 +146,36 @@ public class PeliculaController {
         redirectAtt.addAttribute("msj", "La pelicula fue eliminada correctamente!");
         redirectAtt.addAttribute("tipoMsj", "success");
         return "redirect:/listado";
+    }
+
+    @GetMapping("/buscar")
+    public String buscar(
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) Long generoId,
+            @RequestParam(required = false) Long actorId,
+            @RequestParam(name = "pagina", defaultValue = "0") Integer pagina,
+            Model model) {
+
+        PageRequest pr = PageRequest.of(pagina, 12);
+        Page<Pelicula> page = service.buscarConFiltros(nombre, generoId, actorId, pr);
+
+        model.addAttribute("peliculas", page.getContent());
+        model.addAttribute("generos", generoService.findAll());
+        model.addAttribute("actores", actorService.findAll());
+        model.addAttribute("titulo", "Buscar Películas");
+
+        // Mantener valores en el formulario
+        model.addAttribute("nombreBusqueda", nombre);
+        model.addAttribute("generoBusqueda", generoId);
+        model.addAttribute("actorBusqueda", actorId);
+
+        if (page.getTotalPages() > 0) {
+            List<Integer> paginas = IntStream.rangeClosed(1, page.getTotalPages()).boxed().toList();
+            model.addAttribute("paginas", paginas);
+        }
+
+        model.addAttribute("actual", pagina + 1);
+
+        return "buscar";
     }
 }

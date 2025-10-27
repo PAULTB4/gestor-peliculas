@@ -12,22 +12,36 @@
 
     <div class="row row-cols-1 row-cols-md-6 g-4">
         <div class="col" th:each="pelicula : ${peliculas}">
-            <div class="card">
-                <img th:src="@{${'/archivo?n='} + ${pelicula.imagen == null ? '_default.jpg' : pelicula.imagen}}"
-                class="card-img-top" alt="foto">
+            <a th:href="@{'/pelicula/' + ${pelicula.id} + '/detalle'}" class="text-decoration-none">
+                <div class="card h-100">
+                    <img th:src="@{${'/archivo?n='} + ${pelicula.imagen == null ? '_default.jpg' : pelicula.imagen}}"
+                         class="card-img-top" alt="foto">
 
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${pelicula.nombre}"></h5>
-                    <p class="card-text" th:text="${pelicula.genero.nombre}"></p>
-                    <div class="catalogo-actor-container" th:each="protagonista : ${pelicula.protagonistas}">
-                        <div class="catalogo-actor-imagen"
-                             th:style="'background-image:url(' + ${protagonista.urlImagen} + ')'">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark" th:text="${pelicula.nombre}"></h5>
+                        <p class="card-text text-muted" th:text="${pelicula.genero.nombre}"></p>
+
+                        <!-- Calificación promedio -->
+                        <div class="mb-2">
+                    <span class="text-warning">
+                        <span th:each="i : ${#numbers.sequence(1, 5)}">
+                            <span th:if="${i <= pelicula.calificacionPromedio}">★</span>
+                            <span th:if="${i > pelicula.calificacionPromedio}">☆</span>
+                        </span>
+                    </span>
+                            <small class="text-muted ms-1" th:text="'(' + ${pelicula.totalResenas} + ')'"></small>
                         </div>
-                        <div class="catalogo-actor-texto" th:text="${protagonista.nombre}">
+
+                        <div class="catalogo-actor-container" th:each="protagonista : ${pelicula.protagonistas}">
+                            <div class="catalogo-actor-imagen"
+                                 th:style="'background-image:url(' + ${protagonista.urlImagen} + ')'">
+                            </div>
+                            <div class="catalogo-actor-texto text-dark" th:text="${protagonista.nombre}">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 

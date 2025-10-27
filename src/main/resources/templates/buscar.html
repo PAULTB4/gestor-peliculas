@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{layouts/head :: head}">
+</head>
+
+<body>
+<header th:insert="~{layouts/header :: header}"></header>
+
+<div class="container">
+    <h1 th:text="${titulo}" class="mt-4 mb-4"></h1>
+
+    <!-- Formulario de búsqueda -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form th:action="@{/buscar}" method="get">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label for="nombre" class="form-label">Nombre de la película</label>
+                        <input type="text"
+                               class="form-control"
+                               id="nombre"
+                               name="nombre"
+                               placeholder="Buscar por nombre..."
+                               th:value="${nombreBusqueda}">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="generoId" class="form-label">Género</label>
+                        <select class="form-select" id="generoId" name="generoId">
+                            <option value="">Todos los géneros</option>
+                            <option th:each="genero : ${generos}"
+                                    th:value="${genero.id}"
+                                    th:text="${genero.nombre}"
+                                    th:selected="${genero.id == generoBusqueda}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="actorId" class="form-label">Actor</label>
+                        <select class="form-select" id="actorId" name="actorId">
+                            <option value="">Todos los actores</option>
+                            <option th:each="actor : ${actores}"
+                                    th:value="${actor.id}"
+                                    th:text="${actor.nombre}"
+                                    th:selected="${actor.id == actorBusqueda}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">
+                             Buscar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Resultados -->
+    <div class="row row-cols-1 row-cols-md-6 g-4">
+        <div class="col" th:each="pelicula : ${peliculas}">
+            <div class="card h-100">
+                <img th:src="@{${'/archivo?n='} + ${pelicula.imagen == null ? '_default.jpg' : pelicula.imagen}}"
+                     class="card-img-top" alt="foto">
+
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${pelicula.nombre}"></h5>
+                    <p class="card-text" th:text="${pelicula.genero.nombre}"></p>
+                    <div class="catalogo-actor-container" th:each="protagonista : ${pelicula.protagonistas}">
+                        <div class="catalogo-actor-imagen"
+                             th:style="'background-image:url(' + ${protagonista.urlImagen} + ')'">
+                        </div>
+                        <div class="catalogo-actor-texto" th:text="${protagonista.nombre}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Paginación -->
+    <nav aria-label="Page navigation" class="mt-4" th:if="${paginas != null}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:each="pagina : ${paginas}"
+                th:classappend="${pagina == actual ? 'active' : ''}">
+                <a class="page-link"
+                   th:href="@{/buscar(pagina=${pagina-1}, nombre=${nombreBusqueda}, generoId=${generoBusqueda}, actorId=${actorBusqueda})}"
+                   th:text="${pagina}">
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Mensaje si no hay resultados -->
+    <div th:if="${#lists.isEmpty(peliculas)}" class="alert alert-info mt-4">
+        No se encontraron películas con los criterios de búsqueda especificados.
+    </div>
+</div>
+
+</body>
+</html>

@@ -29,3 +29,175 @@
     background-size: cover;
 }
 
+/* ===== MODO OSCURO ===== */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+/* Cards en modo oscuro */
+.dark-mode .card {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #e0e0e0;
+}
+
+.dark-mode .card-title,
+.dark-mode .card-text {
+    color: #e0e0e0 !important;
+}
+
+/* Tablas en modo oscuro */
+.dark-mode .table {
+    color: #e0e0e0;
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-mode .table thead {
+    background-color: #353535;
+}
+
+.dark-mode .table-group-divider {
+    border-color: #404040;
+}
+
+.dark-mode tbody tr {
+    border-color: #404040;
+}
+
+.dark-mode tbody tr:hover {
+    background-color: #353535;
+}
+
+/* Forms en modo oscuro */
+.dark-mode .form-control,
+.dark-mode .form-select,
+.dark-mode textarea {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #404040;
+}
+
+.dark-mode .form-control:focus,
+.dark-mode .form-select:focus,
+.dark-mode textarea:focus {
+    background-color: #353535;
+    color: #e0e0e0;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.dark-mode .form-control::placeholder {
+    color: #888;
+}
+
+.dark-mode .form-label {
+    color: #e0e0e0;
+}
+
+/* Navbar en modo oscuro ya está (usa data-bs-theme="dark") */
+
+/* Paginación en modo oscuro */
+.dark-mode .pagination .page-link {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #e0e0e0;
+}
+
+.dark-mode .pagination .page-link:hover {
+    background-color: #404040;
+    color: #fff;
+    border-color: #555;
+}
+
+.dark-mode .pagination .active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+/* Alertas en modo oscuro */
+.dark-mode .alert {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #e0e0e0;
+}
+
+.dark-mode .alert-info {
+    background-color: #1a3a52;
+    border-color: #2a5a7a;
+    color: #9dd1ff;
+}
+
+.dark-mode .alert-success {
+    background-color: #1a3d2e;
+    border-color: #2a5d4a;
+    color: #a0e9c6;
+}
+
+.dark-mode .alert-danger {
+    background-color: #4a1a1a;
+    border-color: #6a2a2a;
+    color: #ff9999;
+}
+
+/* Links en modo oscuro */
+.dark-mode a:not(.btn):not(.nav-link):not(.page-link) {
+    color: #6ea8fe;
+}
+
+.dark-mode a:not(.btn):not(.nav-link):not(.page-link):hover {
+    color: #9ec5fe;
+}
+
+/* Botones en modo oscuro - mantener colores originales de Bootstrap */
+.dark-mode .btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.dark-mode .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.dark-mode .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Switch del modo oscuro */
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* Estilos para los actores en modo oscuro */
+.dark-mode .catalogo-actor-texto {
+    color: #e0e0e0;
+}
+
+/* Vista previa de imagen en modo oscuro */
+.dark-mode #vista_previa {
+    border: 2px solid #404040;
+}
+
+/* Invalid feedback en modo oscuro */
+.dark-mode .invalid-feedback {
+    color: #ff9999;
+}
+
+/* Card hover effect */
+.dark-mode .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dark-mode .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}

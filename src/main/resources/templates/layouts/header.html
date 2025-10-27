@@ -12,12 +12,32 @@
                         <a class="nav-link active" aria-current="page" th:href="@{/home}">Catalogo</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" th:href="@{/buscar}"> Buscar</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" th:href="@{/pelicula}">Nueva Pelicula</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/listado}">Administrar</a>
                     </li>
                 </ul>
+
+                <!-- Toggle de modo oscuro -->
+                <div class="ms-auto me-3">
+                    <div class="form-check form-switch d-flex align-items-center">
+                        <input class="form-check-input me-2"
+                               type="checkbox"
+                               role="switch"
+                               id="darkModeToggle"
+                               style="cursor: pointer;">
+                        <label class="form-check-label text-light mb-0"
+                               for="darkModeToggle"
+                               style="cursor: pointer;">
+                            🌙 Modo Oscuro
+                        </label>
+                    </div>
+                </div>
+            </div>
             </div>
             <div th:if="${msj!=null}" th:text="${msj}" th:class="${tipoMsj!=null?'alert alert-'+tipoMsj:'alert'}"></div>
         </div>

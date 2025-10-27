@@ -12,4 +12,5 @@ public interface IPeliculaService {
     public List<Pelicula> findAll();
     public Page<Pelicula> findAll(Pageable pegable);
     public void delete(Long id);
+    public Page<Pelicula> buscarConFiltros(String nombre, Long generoId, Long actorId, Pageable pageable);
 }
